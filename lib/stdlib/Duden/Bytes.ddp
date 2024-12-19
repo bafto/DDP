@@ -1,0 +1,43 @@
+Wir nennen die öffentliche Kombination aus
+    der Zahlen Liste bytes mit Standardwert  eine leere Zahlen Liste,
+    der Zahl länge mit Standardwert 0,
+eine ByteSammlung,
+und erstellen sie so:
+    "eine leere ByteSammlung",
+    "einer leeren ByteSammlung"
+
+Die öffentliche Funktion ByteSammlung_Länge mit dem Parameter bytes vom Typ ByteSammlung, gibt eine Zahl zurück, macht:
+    Gib länge von bytes zurück.
+Und überlädt den "Länge" Operator.
+
+Die öffentliche Funktion ByteSammlung_Von_Bis mit den Parametern bytes, start und ende vom Typ ByteSammlung, Zahl und Zahl, gibt eine ByteSammlung zurück,
+ist in "libddpstdlib.a" definiert
+Und überlädt den "von bis" Operator.
+
+Die öffentliche Funktion ByteSammlung_Verkettet mit den Parametern a und b vom Typ ByteSammlung und ByteSammlung, gibt eine ByteSammlung zurück,
+ist in "libddpstdlib.a" definiert
+Und überlädt den "verkettet mit" Operator.
+
+[
+    Erstellt eine neue ByteSammlung aus den 8 bytes in z
+]
+Die öffentliche Funktion Zahl_Als_ByteSammlung mit dem Parameter z vom Typ Zahl, gibt eine ByteSammlung zurück,
+ist in "libddpstdlib.a" definiert
+Und überlädt den "als" Operator.
+
+[
+    Gibt eine neue Zahl zurück, die aus den ersten (maximal) 8 bytes in b besteht
+]
+Die öffentliche Funktion ByteSammlung_Als_Zahl mit dem Parameter bytes vom Typ ByteSammlung, gibt eine Zahl zurück,
+ist in "libddpstdlib.a" definiert
+Und überlädt den "als" Operator.
+
+Binde "Duden/Ausgabe" ein.
+Binde "Duden/Zahlen" ein.
+
+Die ByteSammlung b ist 4294902015 als ByteSammlung.
+Die Zahl z ist b als Zahl.
+Schreibe (z in Hexadezimal) auf eine Zeile.
+Schreibe (((b im Bereich von 1 bis 9) als Zahl) in Hexadezimal) auf eine Zeile.
+Schreibe ((((b verkettet mit b) im Bereich von 4 bis 10) als Zahl) in Hexadezimal) auf eine Zeile.
+Schreibe (die Länge von (b verkettet mit b)) auf eine Zeile.
