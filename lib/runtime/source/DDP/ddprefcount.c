@@ -12,6 +12,8 @@
 	THEY ARE NOT EQUIVALENT
 */
 
+#if DDP_ENABLE_REFC_POOL
+
 typedef struct RefcBlock {
 	struct RefcBlock *prev;
 	struct RefcBlock *next;
@@ -136,3 +138,18 @@ void ddp_free_refc_blocks(void) {
 		DDP_FREE(RefcBlock, to_free);
 	}
 }
+#else  // DDP_ENABLE_REFC_POOL
+
+// returns a new refcount
+ddpint *ddp_allocate_refcount(void) {
+	return DDP_ALLOCATE(ddpint, 1);
+}
+
+// frees the given refcount
+void ddp_free_refcount(ddpint *refc) {
+	DDP_FREE(ddpint, refc);
+}
+
+// frees internal memory used for refc allocation
+void ddp_free_refc_blocks(void) {}
+#endif // DDP_ENABLE_REFC_POOL

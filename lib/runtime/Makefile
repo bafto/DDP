@@ -4,8 +4,9 @@ OUT_FILE_NAME_DEBUG = $(OUT_FILE_NAME:.a=debug.a)
 .PHONY: all clean debug
 .DEFAULT_GOAL = all
 
+DDP_ENABLE_REFC_POOL = 1
 CC = gcc
-CCFLAGS = -c -Wall -Werror -Wextra -Wno-format -O2 -std=c11 -pedantic -D_POSIX_C_SOURCE=200809L -D_DEFAULT_SOURCE=1
+CCFLAGS = -c -Wall -Werror -Wextra -Wno-format -O2 -std=c11 -pedantic -D_POSIX_C_SOURCE=200809L -D_DEFAULT_SOURCE=1 -DDDP_ENABLE_REFC_POOL=$(DDP_ENABLE_REFC_POOL)
 DEBUGFLAGS = -DDDP_DEBUG
 INC = -I./include/
 

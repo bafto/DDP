@@ -119,12 +119,12 @@ runtime-copies: $(RUN_DIR_OUT)
 	$(CP) $(RUN_DIR)include/ $(RUN_DIR)source/ $(RUN_DIR)Makefile $(RUN_DIR_OUT)
 
 runtime: runtime-copies $(LIB_DIR_OUT) ## compiles the runtime into build/DDP/lib/stdlib
-	'$(MAKE)' -C $(RUN_DIR)
+	'$(MAKE)' -C $(RUN_DIR) $(if $(DDP_ENABLE_REFC_POOL),DDP_ENABLE_REFC_POOL=$(DDP_ENABLE_REFC_POOL))
 	$(CP) $(RUN_DIR)$(RUN_BIN) $(LIB_DIR_OUT)$(RUN_BIN)
 	$(CP) $(RUN_BIN_MAIN_DIR)$(RUN_BIN_MAIN) $(LIB_DIR_OUT)$(RUN_BIN_MAIN)
 
 runtime-debug: runtime-copies $(LIB_DIR_OUT) ## same as runtime but prints debugging information
-	'$(MAKE)' -C $(RUN_DIR) debug
+	'$(MAKE)' -C $(RUN_DIR) $(if $(DDP_ENABLE_REFC_POOL),DDP_ENABLE_REFC_POOL=$(DDP_ENABLE_REFC_POOL)) debug
 	$(CP) $(RUN_DIR)$(RUN_BIN_DEBUG) $(LIB_DIR_OUT)$(RUN_BIN)
 	$(CP) $(RUN_BIN_MAIN_DIR)$(RUN_BIN_MAIN_DEBUG) $(LIB_DIR_OUT)$(RUN_BIN_MAIN)
 
