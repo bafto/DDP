@@ -24,9 +24,9 @@ static struct timespec bench_start(void) {
 }
 
 static void bench_end(struct timespec tstart, const char *op) {
-#ifdef DDP_DEBUG
 	(void)op;
 	(void)tstart;
+#ifdef DDP_DEBUG
 	struct timespec tend = {0, 0};
 	clock_gettime(CLOCK_MONOTONIC, &tend);
 	DDP_DBGLOG("%s took %.2f microseconds", op,
