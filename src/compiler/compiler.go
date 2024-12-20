@@ -122,6 +122,8 @@ type compiler struct {
 	curContinueBlock *ir.Block // block where a continue should jump to
 	curLoopScope     *scope    // scope of the current loop for break/continue to free to
 
+	bindings runtimeBindings // runtime functions of this compiler
+
 	// all the type definitions of inbuilt types used by the compiler
 	void                                                                          *ddpIrVoidType
 	ddpinttyp, ddpfloattyp, ddpbooltyp, ddpchartyp                                *ddpIrPrimitiveType
@@ -2385,7 +2387,7 @@ func (c *compiler) VisitForRangeStmt(s *ast.ForRangeStmt) ast.VisitResult {
 	c.cbb = bodyBlock
 	var num_bytes value.Value
 	if inTyp == c.ddpstring {
-		num_bytes = c.cbb.NewCall(utf8_string_to_char_irfun,
+		num_bytes = c.cbb.NewCall(c.bindings.utf8_string_to_char_irfun,
 			c.cbb.NewLoad(iter_ptr_type, iter_ptr),
 			loopVar.val,
 		)

@@ -9,6 +9,7 @@
 #include "DDP/ddpwindows.h"
 
 #include "DDP/ddpmemory.h"
+#include "DDP/ddprefcount.h"
 #include "DDP/ddptypes.h"
 #include "DDP/debug.h"
 
@@ -73,6 +74,8 @@ void ddp_end_runtime(void) {
 
 	// free the cmd_args
 	ddp_free_ddpstringlist(&cmd_args);
+	// free refcs
+	ddp_free_refc_blocks();
 }
 
 void Befehlszeilenargumente(ddpstringlist *ret) {

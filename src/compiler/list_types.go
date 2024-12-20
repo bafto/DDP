@@ -302,7 +302,7 @@ func (c *compiler) createListFree(listType *ddpIrListType, declarationOnly bool)
 	c.cbb.NewStore(refc_decr, refc_ptr)
 	is_refc_zero := c.cbb.NewICmp(enum.IPredEQ, refc_decr, zero)
 	c.createIfElse(is_refc_zero, func() {
-		c.free(refc_ptr)
+		c.ddp_free_refcount(refc_ptr)
 		free_arr()
 	}, nil)
 
@@ -438,7 +438,7 @@ func (c *compiler) createListShallowCopy(listType *ddpIrListType, declarationOnl
 	*/
 	refc_is_null := c.cbb.NewICmp(enum.IPredEQ, c.cbb.NewPtrToInt(origRefc, ddpint), zero)
 	c.createIfElse(refc_is_null, func() {
-		new_refc := c.allocate(ddpint)
+		new_refc := c.ddp_allocate_refcount()
 		c.cbb.NewStore(newInt(1), new_refc)
 		c.cbb.NewStore(new_refc, c.indexStruct(list, list_refc_field_index))
 	}, nil)

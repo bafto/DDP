@@ -1,6 +1,7 @@
 #include "DDP/ddptypes.h"
 #include "DDP/common.h"
 #include "DDP/ddpmemory.h"
+#include "DDP/ddprefcount.h"
 #include "DDP/debug.h"
 #include <stdlib.h>
 #include <string.h>
@@ -37,7 +38,7 @@ void ddp_free_string(ddpstring *str) {
 	DDP_DBGLOG("decrementing refc");
 	if (--(*str->refc) == 0) {
 		DDP_DBGLOG("freeing str and refc: " DDP_INT_FMT, *str->refc);
-		DDP_FREE(ddpint, str->refc);
+		ddp_free_refcount(str->refc);
 		DDP_DBGLOG("freed refc, freeing str");
 		DDP_FREE_ARRAY(char, str->str, str->cap); // free the character array
 	} else {
@@ -67,7 +68,7 @@ void ddp_shallow_copy_string(ddpstring *ret, ddpstring *str) {
 
 	if (str->refc == NULL) {
 		DDP_DBGLOG("allocating refc");
-		str->refc = DDP_ALLOCATE(ddpint, 1);
+		str->refc = ddp_allocate_refcount();
 		DDP_DBGLOG("allocated refc: %p", str->refc);
 		*str->refc = 1;
 	}
